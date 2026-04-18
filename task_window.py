@@ -16,10 +16,11 @@ def create_second_window(parent):
     # Добавляем элементы
 
     btn_close = tk.Button(win, text="Закрыть", command=win.destroy)
-    btn_close.place(x = 20, y = 180)
+    btn_close.place(x = 20, y = 160)
     name = tk.Entry(win, width=40)
     name.place(x=20)
-
+    btn = tk.Button(win, text="hello")
+    btn.place(x=90, y=160)
 
     # Возвращаем объект окна (не обязательно, но полезно)
     return win
