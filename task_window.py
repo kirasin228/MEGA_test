@@ -1,22 +1,39 @@
 import tkinter as tk
+from tkinter.font import names
+
 from docx import Document
 from tkinter import messagebox
 
 bd = []
 tas =[]
+namess = ""
 
-def validat(st):
+def create_task_file(name_save):
     global tas
-    st = str(st)
-    if st.count(";")!=2:
-        messagebox.showerror("Ошибка", "Выберите хотя бы одну тему!")
-        return
-    a, b, c = st.split(";")
-    if a =="" or b =="" or c=="":
-        messagebox.showerror("Ошибка", "Выберите хотя бы одну тему!")
-        return
-    if st not in tas:
-        tas.append(st)
+    doc = Document()
+    doc.add_paragraph(name_save+"\n")
+    for i in tas:
+        doc.add_paragraph(i+"\n",)
+    doc.save(name_save+".txt")
+    messagebox.showinfo("Успех", "файл " + name_save + " успешно создан")
+
+def validat(lis):
+    global tas, namess
+    for st in lis:
+        if st.count(";")!=2:
+            messagebox.showerror("Ошибка", "Введите в верном формате")
+            return
+        a, b, c = st.split(";")
+        if a =="" or b =="" or c=="":
+            messagebox.showerror("Ошибка", "Введите все значения")
+            return
+        if c not in ["1","2","3"]:
+            messagebox.showerror("Ошибка", "Укажите верный уровень сложности")
+            return
+    for st in lis:
+        if st not in tas:
+            tas.append(st)
+    create_task_file(namess)
 
 
 def cr():
@@ -32,7 +49,8 @@ def Ok():
     global bd
     l = []
     for i in bd:
-        validat(i.get())
+        l.append(i.get())
+    validat(l)
 def create_second_window(parent):
     # Создаем окно уровня Toplevel
     win = tk.Toplevel(parent)
@@ -50,8 +68,12 @@ def create_second_window(parent):
     name_tsk.place(x=20)
     btn_close = tk.Button(win, text="Закрыть", command=win.destroy)
     btn_close.place(x = 150)
+
+    global namess
+
     name = tk.Entry(win, width=40)
     name.place(x=20,y=40)
+    namess = name.get()
     btn_Ok = tk.Button(win, text="Ok",command=Ok)
     btn_Ok.place(x=230)
 
