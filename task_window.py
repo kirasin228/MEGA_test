@@ -1,6 +1,23 @@
 import tkinter as tk
 from docx import Document
+from tkinter import messagebox
+
 bd = []
+tas =[]
+
+def validat(st):
+    global tas
+    st = str(st)
+    if st.count(";")!=2:
+        messagebox.showerror("Ошибка", "Выберите хотя бы одну тему!")
+        return
+    a, b, c = st.split(";")
+    if a =="" or b =="" or c=="":
+        messagebox.showerror("Ошибка", "Выберите хотя бы одну тему!")
+        return
+    if st not in tas:
+        tas.append(st)
+
 
 def cr():
     doc = Document()
@@ -15,7 +32,7 @@ def Ok():
     global bd
     l = []
     for i in bd:
-        print(i.get())
+        validat(i.get())
 def create_second_window(parent):
     # Создаем окно уровня Toplevel
     win = tk.Toplevel(parent)
