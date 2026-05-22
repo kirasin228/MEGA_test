@@ -6,7 +6,7 @@ from tkinter import messagebox
 
 bd = []
 tas =[]
-namess = ""
+name=""
 
 def create_task_file(name_save):
     global tas
@@ -14,11 +14,11 @@ def create_task_file(name_save):
     doc.add_paragraph(name_save+"\n")
     for i in tas:
         doc.add_paragraph(i+"\n",)
-    doc.save(name_save+".txt")
+    doc.save(name_save+".docx")
     messagebox.showinfo("Успех", "файл " + name_save + " успешно создан")
 
-def validat(lis):
-    global tas, namess
+def validat(lis, namess):
+    global tas
     for st in lis:
         if st.count(";")!=2:
             messagebox.showerror("Ошибка", "Введите в верном формате")
@@ -36,9 +36,6 @@ def validat(lis):
     create_task_file(namess)
 
 
-def cr():
-    doc = Document()
-    doc.save(name.get()+'.docx')
 def create_task(win):
     global  bd
     E_tasks = tk.Entry(win, width=14)
@@ -46,12 +43,14 @@ def create_task(win):
     win.current_y+=25
     bd.append(E_tasks)
 def Ok():
-    global bd
+    global bd, name
+    namess = name.get()
     l = []
     for i in bd:
         l.append(i.get())
-    validat(l)
+    validat(l,namess)
 def create_second_window(parent):
+    global name
     # Создаем окно уровня Toplevel
     win = tk.Toplevel(parent)
     win.current_y=80
@@ -69,11 +68,9 @@ def create_second_window(parent):
     btn_close = tk.Button(win, text="Закрыть", command=win.destroy)
     btn_close.place(x = 150)
 
-    global namess
 
     name = tk.Entry(win, width=40)
     name.place(x=20,y=40)
-    namess = name.get()
     btn_Ok = tk.Button(win, text="Ok",command=Ok)
     btn_Ok.place(x=230)
 
