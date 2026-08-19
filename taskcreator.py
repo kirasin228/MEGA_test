@@ -40,10 +40,10 @@ def create_tasks(data,n): #
     return tasks_result
 
 
-# a = file_read('nn_or_n_in_pril.txt')#25-max
-# s = prepare_data(a)
-# d = filter_level(s,3)
-# q = create_tasks(d, 25)
-# print(q)
-# print(''' ''')
-# print(create_tasks(filter_level(prepare_data(file_read('pre_pri.txt')),2),50)) #50 - максимум
+a = file_read('tasks/nn_or_n_in_pril.txt')#25-max
+s = prepare_data(a)
+d = filter_level(s,3)
+q = create_tasks(d, 25)
+print(q)
+print(''' ''')
+print(create_tasks(filter_level(prepare_data(file_read('tasks/pre_pri.txt')),2),50)) #50 - максимум
