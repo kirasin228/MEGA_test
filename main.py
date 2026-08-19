@@ -8,7 +8,7 @@ import taskcreator
 import taskcreator as tc
 from task_window import create_second_window
 
-# this is OOP
+
 def add_window():
     create_second_window(root)
 def create_word_document(doc_name, tasks):
